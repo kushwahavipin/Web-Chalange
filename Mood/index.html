@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Changer on Hover</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .content {
+            padding: 20px 40px;
+            font-size: 24px;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #333;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content" id="content">Move your cursor around!</div>
+
+    <script>
+        const content = document.getElementById('content');
+
+        document.body.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            const red = Math.round((x / width) * 255);
+            const green = Math.round((y / height) * 255);
+            const blue = 150;
+
+            document.body.style.backgroundColor = rgb(${red}, ${green}, ${blue});
+
+            if (red > green && red > blue) {
+                content.textContent = 'Red Mood';
+            } else if (green > red && green > blue) {
+                content.textContent = 'Green Mood';
+            } else {
+                content.textContent = 'Blue Mood';
+            }
+        });
+
+        document.body.addEventListener('mouseleave', () => {
+            document.body.style.backgroundColor = '';
+            content.textContent = 'Move your cursor around!';
+        });
+    </script>
+</body>
+</html>
